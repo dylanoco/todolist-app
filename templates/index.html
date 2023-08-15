@@ -6,10 +6,17 @@
 </head>
 <body>
     <h1>NERO Todolist</h1>
+    <form action="{{ url_for('add_task', name=add_name) }}" method = "POST">
+        <input type="text" name="add_name" placeholder="Enter the name of the task.">
+        <button type="submit">Add Task</button>
+    </form>
+    <br>
     <ul>
         {% for todo in todos %}
             {% if todo['done'] == False %}
-                <li>{{todo['task_name']}} <a href="{{ url_for('update_array', name=todo['task_name'] ) }}"> Complete </a></li>
+                <li>{{todo['task_name']}} 
+                    <a href="{{ url_for('complete_task', name=todo['task_name'] ) }}"> Complete </a> 
+                    <a href="{{ url_for('delete_task', name=todo['task_name'] ) }}"> Delete </a></li>
             {% endif %}
         {% endfor %}
     </ul>

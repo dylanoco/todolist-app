@@ -8,13 +8,30 @@ todos = [{"task_name": "Sample", "done": False}]
 def index():
     return render_template("index.html", todos=todos)
 
-@app.route("/update/<name>", methods=['GET'])
-def update_array(name):
+@app.route("/complete/<name>", methods=['GET'])
+def complete_task(name):
     for todo in todos:
         if todo['task_name'] == name:
             todo["done"] = True
             break  # Assuming each task name is unique
+    
+    return redirect(url_for('index'))
+
+@app.route("/delete/<name>", methods=['GET'])
+def delete_task(name):
+    for todo in todos:
+        if todo['task_name'] == name:
+            todos.remove(todo)
+            break
+    return redirect(url_for('index'))
+
+@app.route("/add", methods=['GET','POST'])
+def add_task():
+    name = request.form['add_name']
+    new_task = {"task_name": name, "done": False}
+    todos.append(new_task)
 
     return redirect(url_for('index'))
+
 if __name__ == '__main__':
     app.run(debug=True)
