@@ -5,10 +5,12 @@
     <title>Nero ToDo List</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <h1>NERO Todolist</h1>
     <ul>
         {% for todo in todos %}
-        <li>{{todo['task_name']}}</li>
+            {% if todo['done'] == False %}
+                <li>{{todo['task_name']}} <a href="{{ url_for('update_array', name=todo['task_name'] ) }}"> Complete </a></li>
+            {% endif %}
         {% endfor %}
     </ul>
 </body>
