@@ -1,8 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for
-
+from tasks import Task
 app = Flask(__name__, template_folder="templates")
 
-todos = [{"task_name": "Sample", "done": False}]
+todos = []
+todos.append(Task("Make a Paper Plane."))
+todos.append(Task("Take Vitamins."))
+
+
 
 @app.route("/")
 def index():
@@ -11,8 +15,8 @@ def index():
 @app.route("/complete/<name>", methods=['GET'])
 def complete_task(name):
     for todo in todos:
-        if todo['task_name'] == name:
-            todo["done"] = True
+        if todo.getTaskName() == name:
+            todo.setTaskStatus()
             break  # Assuming each task name is unique
     
     return redirect(url_for('index'))
@@ -20,7 +24,7 @@ def complete_task(name):
 @app.route("/delete/<name>", methods=['GET'])
 def delete_task(name):
     for todo in todos:
-        if todo['task_name'] == name:
+        if todo.getTaskName() == name:
             todos.remove(todo)
             break
     return redirect(url_for('index'))
@@ -28,7 +32,7 @@ def delete_task(name):
 @app.route("/add", methods=['GET','POST'])
 def add_task():
     name = request.form['add_name']
-    new_task = {"task_name": name, "done": False}
+    new_task = Task(name)
     todos.append(new_task)
 
     return redirect(url_for('index'))

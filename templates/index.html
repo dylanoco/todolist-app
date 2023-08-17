@@ -13,10 +13,16 @@
     <br>
     <ul>
         {% for todo in todos %}
-            {% if todo['done'] == False %}
-                <li>{{todo['task_name']}} 
-                    <a href="{{ url_for('complete_task', name=todo['task_name'] ) }}"> Complete </a> 
-                    <a href="{{ url_for('delete_task', name=todo['task_name'] ) }}"> Delete </a></li>
+            {% if todo.getTaskStatus() == False %}
+                <li >{{todo.getTaskName()}} 
+                    <a href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
+                    <a href="{{ url_for('delete_task', name=todo.getTaskName() ) }}"> Delete </a>
+                </li>
+            {% else %}
+                <li style="color: green;">{{todo.getTaskName()}} 
+                    <a href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
+                    <a href="{{ url_for('delete_task', name=todo.getTaskName() ) }}"> Delete </a>
+                </li>
             {% endif %}
         {% endfor %}
     </ul>
