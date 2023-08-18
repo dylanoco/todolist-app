@@ -18,7 +18,13 @@
                     <a href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
                     <a href="{{ url_for('delete_task', name=todo.getTaskName() ) }}"> Delete </a>
                 </li>
-            {% else %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <h1>Completed</h1>
+    <ul>
+        {% for todo in todos %}
+            {% if todo.getTaskStatus() == True %}
                 <li style="color: green;">{{todo.getTaskName()}} 
                     <a href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
                     <a href="{{ url_for('delete_task', name=todo.getTaskName() ) }}"> Delete </a>
