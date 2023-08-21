@@ -3,34 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Nero ToDo List</title>
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-    <h1>NERO Todolist</h1>
-    <form action="{{ url_for('add_task', name=add_name) }}" method = "POST">
-        <input type="text" name="add_name" placeholder="Enter the name of the task.">
-        <button type="submit">Add Task</button>
-    </form>
+    <div class = "banner-card">
+        <img src="/static/images/mountains.jpg">
+        <h1>NERO Todolist</h1>
+        <form action="{{ url_for('add_task', name=add_name) }}" method = "POST">
+            <input type="text" name="add_name" placeholder="Enter the name of the task.">
+            <button type="submit">Add Task</button>
+        </form>
+    </div>
     <br>
-    <ul>
-        {% for todo in todos %}
-            {% if todo.getTaskStatus() == False %}
-                <li >{{todo.getTaskName()}} 
-                    <a href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
-                    <a href="{{ url_for('delete_task', name=todo.getTaskName() ) }}"> Delete </a>
-                </li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-    <h1>Completed</h1>
-    <ul>
-        {% for todo in todos %}
-            {% if todo.getTaskStatus() == True %}
-                <li style="color: green;">{{todo.getTaskName()}} 
-                    <a href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
-                    <a href="{{ url_for('delete_task', name=todo.getTaskName() ) }}"> Delete </a>
-                </li>
-            {% endif %}
-        {% endfor %}
-    </ul>
+    <section class = "inc-section">
+        <ul>
+            {% for todo in todos %}
+                {% if todo.getTaskStatus() == False %}
+                    <li >{{todo.getTaskName()}} 
+                        <a href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
+                        <a href="{{ url_for('delete_task', name=todo.getTaskName() ) }}"> Delete </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </section>
+    <section class = "comp-section">
+        <h1>Completed</h1>
+        <ul>
+            {% for todo in todos %}
+                {% if todo.getTaskStatus() == True %}
+                    <li style="color: green;">{{todo.getTaskName()}} 
+                        <a href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
+                        <a href="{{ url_for('delete_task', name=todo.getTaskName() ) }}"> Delete </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </section>
 </body>
 </html>
