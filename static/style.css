@@ -42,3 +42,31 @@ body{
 .line{
     border-bottom: 1px solid #CCDBDC;
 }
+
+
+
+.accordion{
+    padding:10px;
+    padding-left: 0px;
+    
+}
+.accordion-header{
+    cursor: pointer;
+}
+.accordion-header::after{
+    text-align: center;
+    content: "5";
+    height: 20px;
+    width: 20px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+.accordion-content{
+    max-height: 0;
+    overflow: hidden;
+    transition: .5s;
+}
+.accordion-header.active +  .accordion-content {
+    max-height: 300px;
+}
