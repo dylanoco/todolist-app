@@ -7,6 +7,7 @@
 </head>
 <body>
     <div class="wrapper">
+        <div class="add-task-button" id="button">+</div>
         <div class = "banner-card">
             <h1>Todolist</h1>
             <div class="banner-content">
@@ -14,10 +15,6 @@
                 <p>lvl.<span class='bigger'>3</span></p>
             </div>
             <div class="xp-bar"></div>
-            <form action="{{ url_for('add_task', name=add_name) }}" method = "POST">
-                <input type="text" name="add_name" placeholder="Enter the name of the task.">
-                <button type="submit">Add Task</button>
-            </form> 
         </div>
         <br>
         <div class = "task-type">
@@ -39,7 +36,9 @@
                 </section>
                 <section class = "comp-section">
                     <div class="accordion">
-                        <div class="accordion-header">Completed</div>
+                        <div class="accordion-header">
+                            <p>Completed</p> 
+                        </div>
                         <div class="accordion-content">
                         {% for todo in todos %}
                             {% if todo.getTaskStatus() == True %}
@@ -56,6 +55,17 @@
                     </div>
                 </section>
             </div>
+        </div>
+        
+    </div>
+    <div class="popup-bg" style="display: none;">
+        <div class="popup-content">
+            <h1>Add a task</h1>
+                <form action="{{ url_for('add_task', name=add_name) }}" method = "POST">
+                    <div class="task-row"><p>Name of Task</p><input type="text" name="add_name" placeholder="Enter the name of the task."></div>
+                    <div class="task-row"><p>Description</p><input type="text" name="add_name" placeholder="Enter the name of the task."></div>
+                    <button type="submit">Add Task</button>
+                </form> 
         </div>
     </div>
     <script src="/static/script.js"></script>
