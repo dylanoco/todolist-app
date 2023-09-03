@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="wrapper">
-        <div class="add-task-button" id="button">+</div>
+        <!-- <div class="add-task-button" id="button">+</div> -->
         <div class = "banner-card">
             <h1>Todolist</h1>
             <div class="banner-content">
@@ -23,8 +23,10 @@
                 <section class = "inc-section">
                     {% for todo in todos %}
                         {% if todo.getTaskStatus() == False %}
-                            <p>
-                                <span>{{todo.getTaskName()}}</span>
+                            <p id = "task-row-area" class = "task-row-display">
+                                <span id = "class-name">{{todo.getTaskName()}}</span>
+                                <span id="task-description" style="display: none;">{{ todo.getDescStatus() }}</span>
+                                <span>
                                 <span>
                                     <a href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
                                     <a href="{{ url_for('delete_task', name=todo.getTaskName() ) }}"> Delete </a>
@@ -37,13 +39,15 @@
                 <section class = "comp-section">
                     <div class="accordion">
                         <div class="accordion-header">
+                            <div class="add-task-button" id="button">+</div>
                             <p>Completed</p> 
                         </div>
                         <div class="accordion-content">
                         {% for todo in todos %}
                             {% if todo.getTaskStatus() == True %}
-                                <p>
+                                <p >
                                     <span style = "color: green;">{{todo.getTaskName()}}</span>
+                                    
                                     <span>
                                         <a href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
                                         <a href="{{ url_for('delete_task', name=todo.getTaskName() ) }}"> Delete </a>
@@ -65,6 +69,16 @@
                     <div class="task-row"><p>Name of Task</p><input type="text" name="add_name" placeholder="Enter the name of the task."></div>
                     <div class="task-row"><p>Description</p><input type="text" name="add_name" placeholder="Enter the name of the task."></div>
                     <button type="submit">Add Task</button>
+                </form> 
+        </div>
+    </div>
+
+    <div class="task-bg" style="display: none;">
+        <div class="task-content">
+            <h1>Add a task</h1>
+                <form action="{{ url_for('add_task', name=add_name) }}" method = "POST">
+                    <p class="task-row">Name of Task</p><input type="text" name="add_name" id = "task-name-row" placeholder="Enter the name of the task.">
+                    <p class="task-row">Description</p><input type="text" name="add_name"  id = "task-description-row" placeholder="Enter the name of the task.">
                 </form> 
         </div>
     </div>

@@ -12,8 +12,36 @@ document.getElementById("button").addEventListener("click", function(){
 })
 
 document.querySelector(".popup-bg").addEventListener("click", function (e) {
-    // Check if the clicked element is the popup content or a child of it
     if (!e.target.closest(".popup-content")) {
         document.querySelector(".popup-bg").style.display = "none";
     }
 })
+
+
+
+const taskRows = document.querySelectorAll('.task-row-display');
+
+const taskBg = document.querySelector('.task-bg');
+const taskContent = document.querySelector('#task-name-row');
+const taskDesc = document.querySelector('#task-description-row');
+
+taskRows.forEach((taskRow) => {
+    taskRow.addEventListener('click', () => {
+        const taskName = taskRow.querySelector('#class-name').textContent;
+        console.log(taskName)
+        const taskDescription = taskRow.querySelector('#task-description').textContent;
+
+        taskContent.value = taskName;
+        taskDesc.value = taskDescription;
+
+        taskBg.style.display = 'flex';
+    });
+});
+
+function closePopup() {
+    taskBg.style.display = 'none';
+}
+
+
+
+

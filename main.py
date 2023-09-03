@@ -3,8 +3,8 @@ from tasks import Task
 app = Flask(__name__, template_folder="templates")
 
 todos = []
-todos.append(Task("Make a Paper Plane."))
-todos.append(Task("Take Vitamins."))
+todos.append(Task("Make a Paper Plane.", "Making a plane."))
+todos.append(Task("Take Vitamins.", "Take my multivitamins in the morning."))
 
 
 
