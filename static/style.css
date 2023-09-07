@@ -4,6 +4,7 @@ body{
     align-items: center;
     justify-content: center;
     background-color: rgb(155, 148, 148);
+    font-family: "Inter";
 }
 .banner-card{
     text-align: center;
@@ -101,6 +102,7 @@ body{
     height:50px;
     text-align: start;
     align-items: center ;
+    z-index: 0;
 
 }
 .accordion-header p::after{

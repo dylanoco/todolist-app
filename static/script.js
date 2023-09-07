@@ -6,7 +6,6 @@ for (i = 0; i<accordion.length;i++){
     })
 }
 
-
 document.getElementById("button").addEventListener("click", function(){
     document.querySelector(".popup-bg").style.display = "flex";
 })
@@ -17,14 +16,16 @@ document.querySelector(".popup-bg").addEventListener("click", function (e) {
     }
 })
 
-
+document.querySelector(".task-bg").addEventListener("click", function (e) {
+    if (!e.target.closest(".task-row-display")) {
+        document.querySelector(".task-bg").style.display = "none";
+    }
+})
 
 const taskRows = document.querySelectorAll('.task-row-display');
-
 const taskBg = document.querySelector('.task-bg');
 const taskContent = document.querySelector('#task-name-row');
 const taskDesc = document.querySelector('#task-description-row');
-
 taskRows.forEach((taskRow) => {
     taskRow.addEventListener('click', () => {
         const taskName = taskRow.querySelector('#class-name').textContent;
@@ -37,10 +38,14 @@ taskRows.forEach((taskRow) => {
         taskBg.style.display = 'flex';
     });
 });
-
 function closePopup() {
     taskBg.style.display = 'none';
 }
+const today = new Date();
+const todayFormatted = new Intl.DateTimeFormat("en-uk", {
+    dateStyle: "medium"
+})
+document.getElementById("date-month").innerHTML = todayFormatted.format(today);
 
 
 
