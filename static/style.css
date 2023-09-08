@@ -43,8 +43,8 @@ body{
 .banner-content .bigger{
     font-size: 100px;
 }
-.xp-bar{
-    border-bottom: 3px solid #CCDBDC;
+#xp-bar{
+    border-bottom: 3px solid transparent;
     margin-left: 50px;
     margin-right: 50px;
     margin-bottom: 25px;
