@@ -29,8 +29,8 @@ const taskDesc = document.querySelector('#task-description-row');
 taskRows.forEach((taskRow) => {
     taskRow.addEventListener('click', () => {
         const xpbarr = document.querySelector("#xp-bar");
-        xpbarr.style.borderBottom = "3px solid transparent";
-        xpbarr.style.borderImage = "linear-gradient(rgba(255, 204, 153, 1), 90%, rgba(255, 204, 153, 0))";
+        xpbarr.style.borderImage = "linear-gradient(0.25turn, rgba(255,249,34), rgba(255,0,128), rgba(56,2,155,0))";
+        xpbarr.style.borderImageSlice =  1;
         
         const taskName = taskRow.querySelector('#class-name').textContent;
         console.log(taskName)
@@ -51,7 +51,5 @@ const todayFormatted = new Intl.DateTimeFormat("en-uk", {
 })
 document.getElementById("date-month").innerHTML = todayFormatted.format(today);
 
-const xpbarr = document.querySelector("#xp-bar");
-xpbarr.style.background = "linear-gradient(to right, #1c87c9 50%, #white 50%)";
 
 

@@ -10,6 +10,7 @@ todos.append(Task("Take Vitamins.", "Take my multivitamins in the morning."))
 
 
 
+
 @app.route("/")
 def index():
     return render_template("index.html", todos=todos, xpLevel = xpLevel)
@@ -41,7 +42,8 @@ def delete_task(name):
 @app.route("/add", methods=['GET','POST'])
 def add_task():
     name = request.form['add_name']
-    new_task = Task(name)
+    desc = request.form['add_desc']
+    new_task = Task(name, desc)
     todos.append(new_task)
 
     return redirect(url_for('index'))
