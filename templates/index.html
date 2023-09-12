@@ -9,11 +9,24 @@
     <div class="wrapper">
         <!-- <div class="add-task-button" id="button">+</div> -->
         <div class = "banner-card">
-            <h1>Todolist</h1>
+            <h1>TODOLIST</h1>
+            <label for="input-file" style="color: white">update image</label>
+            <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file" style="display: none">
+            <script>
+                let bgImage = document.querySelector(".wrapper");
+                let inputFile = document.getElementById("input-file");
+
+                inputFile.onchange = function(){
+                    console.log("detected change");
+                    // bgImage.style.backgroundImage = URL.createObjectURL(inputFile.files[0]);
+                    bgImage.style.backgroundImage = "url("+ URL.createObjectURL(inputFile.files[0]) + ")";
+                    console.log(inputFile.files[0]);
+                }
+            </script>
             <div class="banner-content">
                 <img src="/static/images/gokuchibi.png">
                 <p id="date-month"></p>
-                <p>lvl.<span class='bigger'>{{xpLevel}}</span></p>
+                <p>lvl.<span class='bigger' id = 'xp-lvl'></span></p>
             </div>
             <div id="xp-bar"></div>
         </div>
@@ -27,9 +40,10 @@
                             <p id = "task-row-area" class = "task-row-display">
                                 <span id = "class-name">{{todo.getTaskName()}}</span>
                                 <span id="task-description" style="display: none;">{{ todo.getDescStatus() }}</span>
+                                <span id="task-xp" style="display: none;">{{ todo.getXP() }}</span>
                                 <span>
                                 <span>
-                                    <a href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
+                                    <a id = "complete-task" href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
                                     <a href="{{ url_for('delete_task', name=todo.getTaskName() ) }}"> Delete </a>
                                 </span>
                             </p>
@@ -50,7 +64,7 @@
                                     <span style = "color: green;">{{todo.getTaskName()}}</span>
                                     
                                     <span>
-                                        <a href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
+                                        <a  href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
                                         <a href="{{ url_for('delete_task', name=todo.getTaskName() ) }}"> Delete </a>
                                     </span>
                                 </p>
@@ -66,9 +80,9 @@
     <div class="popup-bg" style="display: none;">
         <div class="popup-content">
             <h1>Add a task</h1>
-                <form action="{{ url_for('add_task', name=add_name) }}" method = "POST">
+                <form action="{{ url_for('add_task', name=add_name, desc = add_desc) }}" method = "POST">
                     <div class="task-row"><p>Name of Task</p><input type="text" name="add_name" placeholder="Enter the name of the task."></div>
-                    <div class="task-row"><p>Description</p><input type="text" name="add_name" placeholder="Enter the name of the task."></div>
+                    <div class="task-row"><p>Description</p><input type="text" name="add_desc" placeholder="Enter the name of the task."></div>
                     <button type="submit">Add Task</button>
                 </form> 
         </div>
