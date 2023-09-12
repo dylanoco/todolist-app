@@ -10,7 +10,10 @@ class Task():
     def getTaskStatus(self):
         return self.status  
     def getDescStatus(self):
-        return self.description      
+        return self.description    
+    def getXP(self):
+        return self.xpAmount
+      
     def setTaskName(self, new_name):
         self.task_name = new_name  
     def setTaskStatus(self):
