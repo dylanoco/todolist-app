@@ -7,13 +7,13 @@
 </head>
 <body>
     <div class="wrapper">
-        <!-- <div class="add-task-button" id="button">+</div> -->
         <div class = "banner-card">
-            <h1>TODOLIST</h1>
-            <label for="input-file" style="color: white">update image</label>
+            <label for="input-file" style="color: white;">update image</label>
             <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file" style="display: none">
+            <h1>TODOLIST</h1>
+
             <script>
-                let bgImage = document.querySelector(".wrapper");
+                let bgImage = document.querySelector(".banner-card");
                 let inputFile = document.getElementById("input-file");
 
                 inputFile.onchange = function(){
@@ -30,7 +30,6 @@
             </div>
             <div id="xp-bar"></div>
         </div>
-        <br>
         <div class = "task-type">
             <div class="wrapper-content">
                 <p>TODO</p>
@@ -38,14 +37,23 @@
                     {% for todo in todos %}
                         {% if todo.getTaskStatus() == False %}
                             <p id = "task-row-area" class = "task-row-display">
-                                <span id = "class-name">{{todo.getTaskName()}}</span>
-                                <span id="task-description" style="display: none;">{{ todo.getDescStatus() }}</span>
+                                <span class = "clickable-task">
+                                    <span id = "task-name" for="radio-button">{{todo.getTaskName()}}</span>
+                                    <span id= "task-description" style="display: none;">{{ todo.getDescStatus() }}</span>
+                                </span>
                                 <span id="task-xp" style="display: none;">{{ todo.getXP() }}</span>
                                 <span>
-                                <span>
-                                    <a id = "complete-task" href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
-                                    <a href="{{ url_for('delete_task', name=todo.getTaskName() ) }}"> Delete </a>
+                                    <a style="display: none;" id = "complete-task" href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
+                                    <a style="display: none;" href="{{ url_for('delete_task', name=todo.getTaskName() ) }}"> Delete </a>
                                 </span>
+                                <input type="checkbox" id="radio-button"  onclick=completeTaskJS()>
+                                <script>
+                                    function completeTaskJS(taskname){
+                                        var myLink = document.getElementById("complete-task");
+                                        // Programmatically trigger a click event
+                                        myLink.click();
+                                    }
+                                </script>
                             </p>
                             <div class = "line"></div>
                         {% endif %}
@@ -64,7 +72,7 @@
                                     <span style = "color: green;">{{todo.getTaskName()}}</span>
                                     
                                     <span>
-                                        <a  href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
+                                        <a id = "complete-task" href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
                                         <a href="{{ url_for('delete_task', name=todo.getTaskName() ) }}"> Delete </a>
                                     </span>
                                 </p>
