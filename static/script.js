@@ -1,8 +1,14 @@
 
 
-//XP Bar#
+//XP Bar
+var rootRGBA = document.querySelector(':root');
+var rootRGBAGetStyle = getComputedStyle(rootRGBA);
+var RGBA = 'rgba('+ rootRGBAGetStyle.getPropertyValue('--xpColourR') + ','+
+rootRGBAGetStyle.getPropertyValue('--xpColourG') + ','+ rootRGBAGetStyle.getPropertyValue('--xpColourB') + ',' + '1)';
 const xpbarr = document.querySelector("#xp-bar");
 const xplvl = document.querySelector("#xp-lvl");
+
+const textColour = document.querySelector(".banner-content");
 let xpbarAmount;
 let xplvlAmount;
 if(xpbarAmount == 100){
@@ -34,6 +40,14 @@ else{
     xplvl.innerHTML = xplvlAmount;
 }
 
+if (localStorage.getItem('RGBA')) {
+    console.log("yes xplvl");
+    RGBA = localStorage.getItem('RGBA');
+}
+else{
+    console.log("no rgba");
+}
+
 function updateXPAmount(newValue) {
     console.log(xplvlAmount);
     xpbarAmount = xpbarAmount + newValue;
@@ -42,20 +56,39 @@ function updateXPAmount(newValue) {
   }
 
 
-  function updateLVL() {
+function updateLVL() {
     xplvlAmount = xplvlAmount + 1;
     // Store the updated value in localStorage
     localStorage.setItem('xplvlAmount', xplvlAmount);
+    const randomR = Math.floor(Math.random() * 256);
+    const randomG = Math.floor(Math.random() * 256);
+    const randomB = Math.floor(Math.random() * 256);
+
+    console.log(`Setting RGB: R=${randomR}, G=${randomG}, B=${randomB}`);
+
+    rootRGBA.style.setProperty('--xpColourR', randomR);
+    rootRGBA.style.setProperty('--xpColourG', randomG);
+    rootRGBA.style.setProperty('--xpColourB', randomB);
+
+    console.log(`Updated RGB: R=${rootRGBA.style.getPropertyValue('--xpColourR')}, G=${rootRGBA.style.getPropertyValue('--xpColourG')}, B=${rootRGBA.style.getPropertyValue('--xpColourB')}`);
+    RGBA = 'rgba('+ rootRGBAGetStyle.getPropertyValue('--xpColourR') + ','+
+    rootRGBAGetStyle.getPropertyValue('--xpColourG') + ','+ rootRGBAGetStyle.getPropertyValue('--xpColourB') + ',' + '1)';
+    console.log(RGBA + "sjdkfguhsfs");
+    localStorage.setItem('RGBA', RGBA);
     xplvl.innerHTML = xplvlAmount;
-  }
+}
 
 if (xpbarAmount == 0){
     xpbarAmount = 0;
     xpbarr.style.borderBottom = "3px solid white";;
+    xpbarr.style.boxShadow = "0px 0px 10px 1px "+RGBA;
     xpbarr.style.borderImageSlice =  1;
 }else{
     xpbarr.style.borderBottom = "3px solid transparent";
-    xpbarr.style.borderImage = "linear-gradient(to right,red," + xpbarAmount + "%, " + "white)";
+    xpbarr.style.borderImage = "linear-gradient(to right," + RGBA + ", "+ xpbarAmount + "%, " + "white)";
+    textColour.style.color = RGBA;
+    // xpbarr.style.borderImage = "linear-gradient(to right,red," + xpbarAmount + "%, " + "white)";
+    xpbarr.style.boxShadow = "0px 0px 10px 1px "+RGBA;
     xpbarr.style.borderImageSlice =  1;
 }
 
@@ -64,10 +97,12 @@ if (completeTask != null){
     completeTask.addEventListener('click', () => {
         updateXPAmount(20);
         xpbarr.style.borderBottom = "3px solid transparent";
-        xpbarr.style.borderImage = "linear-gradient(to right,red," + xpbarAmount + "%, " + "white)";
+        xpbarr.style.borderImage = "linear-gradient(to right," + RGBA + ", "+ xpbarAmount + "%, " + "white)";
+        console.log(xpbarr.style.borderImage);
+        console.log("lksdhfoushdf");
+        xpbarr.style.boxShadow = "0px 0px 10px 1px "+RGBA;
         xpbarr.style.borderImageSlice =  1;
-        console.log(xpbarAmount + " empty.")
-        console.log(xpbarAmount + "xpBar");
+        textColour.style.color = RGBA;
     });
 }
 
@@ -75,7 +110,9 @@ if (xpbarAmount >= 100){
     updateLVL();
     xpbarAmount = 0;
     localStorage.setItem('xpbarAmount', xpbarAmount);
-    xpbarr.style.borderBottom = "3px solid white";;
+    xpbarr.style.borderBottom = "3px solid white";
+    xpbarr.style.borderImage = "linear-gradient(to right," + RGBA + ", "+ xpbarAmount + "%, " + "white)";
+    xpbarr.style.boxShadow = "0px 0px 10px 1px "+RGBA;
     xpbarr.style.borderImageSlice =  1;
 }
 //Accordion JS
@@ -100,15 +137,15 @@ document.querySelector(".task-bg").addEventListener("click", function (e) {
 })
 
 // Clickable Rows
-const taskRows = document.querySelectorAll('.task-row-display');
+const taskRows = document.querySelectorAll('.clickable-task');
 const taskBg = document.querySelector('.task-bg');
 const taskContent = document.querySelector('#task-name-row');
 const taskDesc = document.querySelector('#task-description-row');
 taskRows.forEach((taskRow) => {
     taskRow.addEventListener('click', () => {
         
-        const taskName = taskRow.querySelector('#class-name').textContent;
-        console.log(taskName)
+        const taskName = taskRow.querySelector('#task-name').textContent;
+        console.log(taskName);
         const taskDescription = taskRow.querySelector('#task-description').textContent;
 
         taskContent.value = taskName;
@@ -128,9 +165,8 @@ const todayFormatted = new Intl.DateTimeFormat("en-uk", {
 })
 document.getElementById("date-month").innerHTML = todayFormatted.format(today);
 
-
-
 console.log(xpbarAmount);
+console.log(RGBA);
 console.log(xplvlAmount);
 
 //Background Image
