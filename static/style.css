@@ -1,3 +1,12 @@
+
+
+:root{
+    --xpColourR: 255;
+    --xpColourG: 0;
+    --xpColourB: 0;
+}
+
+
 html{
     background-size:auto;
     background-image: linear-gradient(to bottom right, blue, white);
@@ -11,15 +20,26 @@ body{
     font-family: "Inter";
 }
 .banner-card{
+    background-image: none;
+    background-size: cover;
+    background-position: center center;
+
+
+
+    padding-top: 20px;
     text-align: center;
     position: relative;
+    width: 600px;
+    height: 300px;
+    background-color: #0b0b0b;
+    border-radius: 12px 12px 0 0;
 }
 .banner-card > h1{
     color: whitesmoke;
 }
 .banner-content{
     position: relative;
-    color: linear-gradient(red, yellow);
+    color: white;
     display: flex;
     justify-content: space-between;
     padding-left: 50px;
@@ -36,9 +56,8 @@ body{
     align-self: flex-end;
     margin-bottom: 5px;
     
-}
+} 
 .banner-content p{
-    color: antiquewhite;
     position: relative;
     line-height: 0px;
     align-self: flex-end;
@@ -49,7 +68,7 @@ body{
 }
 #xp-bar{
     text-align:center;
-
+    box-shadow: 0 0 10px 1px black;
     margin-left: 50px;
     margin-right: 50px;
     margin-bottom: 25px;
@@ -57,26 +76,20 @@ body{
 .task-type{
     display: flex;
     flex-direction: column;
-    background-color: rgba(245, 245, 245, 0.151);
+    background-color: rgba(245, 245, 245, 0.658);
     border-radius: 0 0 12px 12px;
-    
+}
+#complete-task{
+    position: inherit;
+    z-index: 3;
 }
 .wrapper{
-    background-image: none;
-    background-color: #0b0b0b;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: contain;
-    background-position: top;
-
-
     border: 3px;
     width: 600px;
     margin:auto ;
     position: relative;
     border-radius: 12px;
     mask-image: none;
-    /* border-radius: 12px; */
 }
 .wrapper-content{
     margin-left: 10px;
@@ -119,7 +132,7 @@ body{
     height:50px;
     text-align: start;
     align-items: center ;
-    z-index: 0;
+    z-index: 1;
 
 }
 .accordion-header p::after{
@@ -146,7 +159,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1;
+    z-index: 2;
 
     color: whitesmoke;
     font-weight: bold;
@@ -160,9 +173,6 @@ body{
     max-height: 300px;
 }
 
-
-
-
 .popup-bg, .task-bg{
     display: none;
     height: 100%;
@@ -174,7 +184,7 @@ body{
     align-items: center;
     justify-content: center;
     top: 0%;
-    z-index: 2;
+    z-index: 1;
 }
 
 .popup-content, .task-content{
@@ -183,7 +193,7 @@ body{
     background-color: white;
     display: flex;
     flex-direction: column;
-    z-index: 3;
+    z-index: 2;
 }
 .task-row{
     display: flex;
