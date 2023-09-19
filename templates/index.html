@@ -73,7 +73,7 @@
                                     
                                     <span>
                                         <a id = "complete-task" href="{{ url_for('complete_task', name=todo.getTaskName() ) }}"> Complete </a> 
-                                        <a href="{{ url_for('delete_task', name=todo.getTaskName() ) }}"> Delete </a>
+                                        <a href=> Delete </a>
                                     </span>
                                 </p>
                             {% endif %}
@@ -99,9 +99,10 @@
     <div class="task-bg" style="display: none;">
         <div class="task-content">
             <h1>Add a task</h1>
-                <form action="{{ url_for('add_task', name=add_name) }}" method = "POST">
+                <form action="{{ url_for('delete_task' ) }}" method = "POST">
                     <p class="task-row">Name of Task</p><input type="text" name="add_name" id = "task-name-row" placeholder="Enter the name of the task.">
-                    <p class="task-row">Description</p><input type="text" name="add_name"  id = "task-description-row" placeholder="Enter the name of the task.">
+                    <p class="task-row">Description</p><input type="text" name="add_desc"  id = "task-description-row" placeholder="Enter the name of the task.">
+                    <button type="submit">Delete</button>
                 </form> 
         </div>
     </div>

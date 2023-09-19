@@ -26,8 +26,9 @@ def complete_task(name):
     
     return redirect(url_for('index'))
 
-@app.route("/delete/<name>", methods=['GET'])
-def delete_task(name):
+@app.route("/delete", methods=['GET','POST'])
+def delete_task():
+    name = request.form['name']
     for todo in todos:
         if todo.getTaskName() == name:
             todos.remove(todo)
