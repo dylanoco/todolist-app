@@ -80,29 +80,18 @@ function updateLVL() {
 
 if (xpbarAmount == 0){
     xpbarAmount = 0;
-    xpbarr.style.borderBottom = "3px solid white";;
-    xpbarr.style.boxShadow = "0px 0px 10px 1px "+RGBA;
+    xpbarr.style.borderBottom = "3px solid white";
+    xpbarr.style.boxShadow = "0px 0px 10px 1px "+ RGBA;
     xpbarr.style.borderImageSlice =  1;
 }else{
-    xpbarr.style.borderBottom = "3px solid transparent";
-    xpbarr.style.borderImage = "linear-gradient(to right," + RGBA + ", "+ xpbarAmount + "%, " + "white)";
-    textColour.style.color = RGBA;
-    // xpbarr.style.borderImage = "linear-gradient(to right,red," + xpbarAmount + "%, " + "white)";
-    xpbarr.style.boxShadow = "0px 0px 10px 1px "+RGBA;
-    xpbarr.style.borderImageSlice =  1;
+    updateColour();
 }
 
 const completeTask = document.querySelector('#complete-task');
 if (completeTask != null){
     completeTask.addEventListener('click', () => {
         updateXPAmount(20);
-        xpbarr.style.borderBottom = "3px solid transparent";
-        xpbarr.style.borderImage = "linear-gradient(to right," + RGBA + ", "+ xpbarAmount + "%, " + "white)";
-        console.log(xpbarr.style.borderImage);
-        console.log("lksdhfoushdf");
-        xpbarr.style.boxShadow = "0px 0px 10px 1px "+RGBA;
-        xpbarr.style.borderImageSlice =  1;
-        textColour.style.color = RGBA;
+        updateColour();
     });
 }
 
@@ -110,10 +99,7 @@ if (xpbarAmount >= 100){
     updateLVL();
     xpbarAmount = 0;
     localStorage.setItem('xpbarAmount', xpbarAmount);
-    xpbarr.style.borderBottom = "3px solid white";
-    xpbarr.style.borderImage = "linear-gradient(to right," + RGBA + ", "+ xpbarAmount + "%, " + "white)";
-    xpbarr.style.boxShadow = "0px 0px 10px 1px "+RGBA;
-    xpbarr.style.borderImageSlice =  1;
+    updateColour();
 }
 //Accordion JS
 const accordion = document.getElementsByClassName('accordion-header');
@@ -158,6 +144,13 @@ function closePopup() {
     taskBg.style.display = 'none';
 }
 
+function updateColour(){
+    xpbarr.style.borderBottom = "3px solid white";
+    xpbarr.style.borderImage = "linear-gradient(to right," + RGBA + ", "+ xpbarAmount + "%, " + "white)";
+    xpbarr.style.boxShadow = "0px 0px 10px 1px "+ RGBA;
+    xpbarr.style.borderImageSlice =  1;
+    textColour.style.color = RGBA;
+}
 //Calendar 
 const today = new Date();
 const todayFormatted = new Intl.DateTimeFormat("en-uk", {
